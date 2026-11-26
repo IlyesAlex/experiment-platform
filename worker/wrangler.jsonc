@@ -1,0 +1,11 @@
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "name": "experiment-platform-api",
+  "main": "index.js",
+  "compatibility_date": "2026-11-25",
+  "workers_dev": true,
+  "triggers": { "crons": ["0 3 * * *"] },
+  "assets": { "directory": "../public", "binding": "ASSETS", "run_worker_first": ["/api/*"] },
+  "vars": { "ALLOWED_ORIGIN": "https://ilyesalex.github.io" },
+  "d1_databases": [{ "binding": "DB", "database_name": "experiment-platform", "database_id": "fe1488af-e4d8-46aa-958e-4dd2b07b3c20", "migrations_dir": "migrations" }]
+}

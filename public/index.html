@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#172d2b">
+  <meta name="description" content="A shared classroom laboratory for cognitive psychology experiments.">
+  <title>Cognition Lab · Experiment platform</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header><a class="brand" href="#/"> <span class="brand-mark">c<span>l</span></span><span>Cognition Lab<small>THE EXPERIMENT PLATFORM</small></span></a><nav aria-label="Main navigation"><a href="#/" data-nav="lab">Experiments</a><a href="#/class" data-nav="class">My class</a><a href="#/instructor" data-nav="instructor">Instructor</a></nav><button id="account" class="button small">Join a class</button></header>
+  <main id="app" tabindex="-1"></main>
+  <footer><span>Cognition Lab <span class="muted">/</span> Learning by doing.</span><span>Classroom editions · Protocol v1.0</span></footer>
+  <dialog id="login"><form id="login-form"><div class="section-label">CLASSROOM ACCESS</div><h2>Welcome to the lab.</h2><p>Use the class password and your approved Neptun code to reserve your place.</p><label>Class<select name="classId" required></select></label><label>Neptun code<input name="code" minlength="3" maxlength="12" pattern="[A-Za-z0-9]{3,12}" autocomplete="username" required placeholder="ABC123 or TEST1"></label><label>Class password<input name="password" type="password" autocomplete="current-password" required></label><label class="check"><input name="consent" type="checkbox" required> I agree to save my responses and timing data for this class. My instructor can export them.</label><p class="form-error" role="alert"></p><div class="actions"><button type="button" class="button secondary" id="close-login">Cancel</button><button class="button">Join class</button></div></form></dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
