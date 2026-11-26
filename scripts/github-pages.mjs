@@ -1,13 +1,16 @@
 // Uses Git Credential Manager for this exact GitHub host. Never prints credentials.
 import {spawnSync} from 'node:child_process';
 const mode=process.argv[2],origin=process.argv[3];
-if(!['configure','status','inspect'].includes(mode))throw new Error('Usage: node scripts/github-pages.mjs configure <Worker URL> | status | inspect');
+if(!['configure','status','inspect','rerun'].includes(mode))throw new Error('Usage: node scripts/github-pages.mjs configure <Worker URL> | status | inspect | rerun <run ID>');
 const credential=spawnSync('git',['credential','fill'],{input:'protocol=https\nhost=github.com\n\n',encoding:'utf8',env:{...process.env,GIT_TERMINAL_PROMPT:'0',GCM_INTERACTIVE:'Never'}});
 if(credential.status!==0)throw new Error('No GitHub credential available. Sign in through Git Credential Manager first.');
 const token=credential.stdout.match(/^password=(.+)$/m)?.[1];if(!token)throw new Error('GitHub credential not found.');
 const base='https://api.github.com/repos/IlyesAlex/experiment-platform';
 async function request(path,method='GET',data){const response=await fetch(base+path,{method,headers:{Authorization:'Bearer '+token,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','Content-Type':'application/json'},...(data?{body:JSON.stringify(data)}:{})});const body=await response.text();let value;try{value=JSON.parse(body);}catch{value={};}if(!response.ok)throw Object.assign(new Error(`GitHub ${method} ${path}: ${response.status} ${value.message||''}`),{status:response.status});return value;}
-if(mode==='inspect'){
+if(mode==='rerun'){
+  if(!/^\d+$/.test(origin))throw new Error('Provide an Actions run ID.');
+  await request('/actions/runs/'+origin+'/rerun','POST');console.log('Requested workflow rerun '+origin);
+}else if(mode==='inspect'){
   const repo=await request('');console.log(JSON.stringify({repository:repo.full_name,branch:repo.default_branch,permissions:repo.permissions}));
 }else if(mode==='configure'){
   const parsed=new URL(origin);if(parsed.protocol!=='https:'||parsed.origin!==origin)throw new Error('Provide the HTTPS Worker origin.');

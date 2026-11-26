@@ -2,6 +2,8 @@
 
 A classroom experiment platform for **GitHub Pages + Cloudflare Workers + D1**. The frontend is static HTML/CSS/JavaScript; authentication, class rosters, enrolment, shared results and real multiplayer run on Cloudflare. No paid libraries or frontend build are required.
 
+Live site: [Cognition Lab](https://ilyesalex.github.io/experiment-platform/). The backend is deployed in `alex.ilyes11@gmail.com`'s Cloudflare account. **TEST-CLASS** has the expected roster **TEST1**, **TEST2**, **TEST3**. Use the privately supplied instructor and class passwords. Create further groups from **Instructor → Create a class**; no code changes or deployment are needed.
+
 ## Features
 
 - Eight task pages: Navon, Posner cueing, mental rotation, dichotic listening, ASRT, weather prediction, Wisconsin card sorting and two-player prisoner's dilemma.
