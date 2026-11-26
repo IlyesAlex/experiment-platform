@@ -35,7 +35,7 @@ Secrets in `worker/.dev.vars` are **local only** and do not configure production
 1. Authenticate the correct account:
 
    ```powershell
-   npx.cmd wrangler login --device --scopes account:read user:read workers:write d1:write
+   npx.cmd wrangler login --device --scopes account:read user:read workers:write workers_scripts:write workers_routes:write d1:write
    npx.cmd wrangler whoami
    ```
 
